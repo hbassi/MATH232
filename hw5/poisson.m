@@ -70,6 +70,7 @@ usoln(Iint,Jint) = reshape(uvec,m,m);
 
 % assuming true solution is known and stored in utrue:
 err = max(max(abs(usoln-utrue)));   
+errs = [errs err];
 fprintf('Error relative to true solution of PDE = %10.3e \n',err)
 
 % plot results:
@@ -82,9 +83,7 @@ hold on
 
 % plot solution:
 contour(X,Y,usoln,30,'k')
-
 axis([a b a b])
 daspect([1 1 1])
 title('Contour plot of computed solution')
 hold off
-
