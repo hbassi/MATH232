@@ -1,5 +1,6 @@
 clear; clc; close all;
 
+
 display('1,1')
 stiff_int(1,1)
 stiff_int(1,2)
