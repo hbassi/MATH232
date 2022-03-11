@@ -3,11 +3,12 @@ close all; clear; clc;
 % define omega
 xmin = -1; xmax = 1;    % x boundary locations
 ymin = -1; ymax = 1;    % y boundary locations
-k1 = 1; k2 = 1; 
+k1 = .1; k2 = 1; 
 
 % define rhs and u_exact
 rhs = @(x,y) -2*((x.^2-1)+(y.^2-1));
 u_e = @(x,y) (x.^2-1).*(y.^2-1);
+
 
 % create mesh
 h = 1/32; detJ = 1/(h^2/4); m = length(xmin:h:xmax); 
@@ -30,7 +31,7 @@ for k = 1:N_el
     end
 end
 
-% assemble linear system
+% assembly linear system
 K = spalloc(N_i,N_i,5*N_i);
 F = zeros(N_i,1);
 for k = 1:N_el
@@ -57,32 +58,30 @@ U_complete(2:end-1,2:end-1) = U;
 [XX,YY] = meshgrid(xmin:h:xmax,ymin:h:ymax);
 u_exact = u_e(XX,YY);
 
-% plot exact solution
-figure
-subplot(1,2,1)
-surf(XX,YY,u_exact)
-axis([-1 1 -1 1 0 1.1])
-xlabel 'x'; ylabel 'y'; zlabel 'u'
-title 'Solution: u_{exact}'
-colormap(turbo)
-colorbar
+% % plot exact solution
+% figure
+% subplot(1,3,1)
+% surf(XX,YY,u_exact)
+% axis([-1 1 -1 1 0 1.1])
+% xlabel 'x'; ylabel 'y'; zlabel 'u'
+% title 'Solution: u_{exact}'
+% colormap(turbo)
 
 % plot fem solution
-subplot(1,2,2)
+% subplot(1,3,2)
 surf(XX,YY,U_complete)
 axis([-1 1 -1 1 0 1.1])
 xlabel 'x'; ylabel 'y'; zlabel 'u'
-title 'Solution: u_{FEM}'
-colormap(turbo)
-colorbar
-
-% plot error contour
-figure
-contourf(XX,YY,abs(U_complete-u_exact))
-colorbar
-xlabel 'x'; ylabel 'y'; 
-title 'Error at Nodes: abs((u_{exact}-u_{FEM}))'
+title 'Solution: k1=10, k2=1'
 colormap(turbo)
 
-% compute discrete L^2 norm
-err = norm(reshape(abs(U_complete-u_exact)*h,[m*m,1]));
+% % plot error contour
+% subplot(1,3,3)
+% contourf(XX,YY,abs(U_complete-u_exact))
+% colorbar
+% xlabel 'x'; ylabel 'y'; 
+% title 'Error at Nodes: abs((u_{exact}-u_{FEM}))'
+% colormap(turbo)
+% 
+% % compute discrete L^2 norm
+% err = norm(reshape(abs(U_complete-u_exact)*h,[m*m,1]));

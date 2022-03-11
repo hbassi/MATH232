@@ -24,7 +24,6 @@ if show == 1
     xlabel 'x'
     ylabel 'y'
     zlabel 'u'
-
 end
 
 
