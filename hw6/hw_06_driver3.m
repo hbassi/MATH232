@@ -3,7 +3,7 @@ close all; clear; clc;
 % define omega
 xmin = -1; xmax = 1;    % x boundary locations
 ymin = -1; ymax = 1;    % y boundary locations
-k1 = .1; k2 = 1; 
+k1 = 1; k2 = 1; 
 
 % define rhs and u_exact
 rhs = @(x,y) -2*((x.^2-1)+(y.^2-1));
@@ -11,7 +11,7 @@ u_e = @(x,y) (x.^2-1).*(y.^2-1);
 
 
 % create mesh
-h = 1/32; detJ = 1/(h^2/4); m = length(xmin:h:xmax); 
+h = 1/2; detJ = 1/(h^2/4); m = length(xmin:h:xmax); 
 [lg,coor,coor_el,ref,N_el,N_i,N_d,N_s] = make_mesh2(xmin,xmax,...
     ymin,ymax,h,k1,k2,1);
 
