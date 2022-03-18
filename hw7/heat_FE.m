@@ -71,6 +71,7 @@ input('Hit <return> to continue  ');
 
 
 % main time-stepping loop:
+uint = u;
 
 for n = 1:nsteps
      tnp = tn + k;   % = t_{n+1}
@@ -86,11 +87,13 @@ for n = 1:nsteps
      rhs = u(2:(m+1));   % interior points (unknowns)
      %uint = A1*uint;
      % fix-up right hand side using BC's (i.e. add vector g to A2*uint)
-     rhs(1) = rhs(1) + r*(g0n + g0np);
-     rhs(m) = rhs(m) + r*(g1n + g1np);
+     %rhs(1) = rhs(1) + r*(g0n + g0np);
+     %rhs(m) = rhs(m) + r*(g1n + g1np);
 
      % solve linear system:
      uint = A1*rhs;
+     uint(1) = uint(1) + r*(g0n);
+     uint(m) = uint(m) + r*(g1n);
 
      % augment with boundary values:
      u = [g0np; uint; g1np];
