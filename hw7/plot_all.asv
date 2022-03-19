@@ -1,0 +1,29 @@
+errscn = [];
+hscn = [];
+errsfe = [];
+hsfe = [];
+errstr = [];
+hstr = [];
+for i=10:10:100
+    [hfe,k,errorfe] = heat_FE(i);
+    [hcn,k,errorcn] = heat_CN(i);
+    [htr,k,errortr] = heat_trbdf2(i);
+    errstr = [errstr errortr];
+    hscn = [hs htr];
+    errstr = [errstr errortr];
+    hstr = [hs htr];
+    errstr = [errstr errortr];
+    hstr = [hs htr];
+end
+clf
+figure
+loglog(1./hs,errs)
+hold on
+loglog([10,100],[1/10^2,1/100^2])
+legend 'TRBDF2' '2^{nd} Order'
+xlabel 'grid spacing (h)'
+ylabel 'Error'
+title 'loglog error at T = 1'
+grid minor
+saveas(gcf, '3.png')
+
