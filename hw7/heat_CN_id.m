@@ -1,4 +1,4 @@
-function [h,k,error] = heat_CN(m)
+function [h,k,error] = heat_CN_id(m)
 %
 % heat_CN.m
 %
@@ -22,7 +22,7 @@ tfinal = 1;                % final time
 h = (bx-ax)/(m+1);         % h = delta x
 x = linspace(ax,bx,m+2)';  % note x(1)=0 and x(m+2)=1
                            % u(1)=g0 and u(m+2)=g1 are known from BC's
-k = 4*h;                  % time step
+k = 4*h/1000;                  % time step
 
 nsteps = round(tfinal / k);    % number of time steps
 %nplot = 1;      % plot solution every nplot time steps
