@@ -18,15 +18,15 @@ ax = 0;
 bx = 1;
 tfinal = 1;                % final time
 
-h = (bx-ax)/(m+1);         % h = delta x
+h = (bx-ax)/(m+1)         % h = delta x
 k = 0.4*h;                  % time step
-nu = a*k/h;                % Courant number
+nu = a*k/h                % Courant number
 x = linspace(ax,bx,m+2)';  % note x(1)=0 and x(m+2)=1
                            % With periodic BC's there are m+1 unknowns u(2:m+2)
 I = 2:(m+2);   % indices of unknowns
 
 nsteps = round(tfinal / k);    % number of time steps
-nplot = 20;       % plot solution every nplot time steps
+nplot = 10;       % plot solution every nplot time steps
                   % (set nplot=2 to plot every 2 time steps, etc.)
 nplot = nsteps;  % only plot at final time
 
@@ -81,7 +81,8 @@ for n = 1:nsteps
      u(m+3) = u(2);   % copy value from leftmost unknown to ghost cell on right
 
      % plot results at desired times:
-     if mod(n,nplot)==0 | n==nsteps
+     if mod(n,nplot)==0 || n==nsteps
+        figure
         uint = u(1:m+2);  % points on the interval (drop ghost cell on right)
         ufine = utrue(xfine,tnp);
         plot(x,uint,'b.-', xfine,ufine,'r')
