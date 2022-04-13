@@ -19,7 +19,7 @@ bx = 1;
 tfinal = 1;                % final time
 
 h = (bx-ax)/(m+1);         % h = delta x
-k = 0.4*h                  % time step
+k = .9*h                  % time step
 nu = a*k/h;                % Courant number
 x = linspace(ax,bx,m+2)';  % note x(1)=0 and x(m+2)=1
                            % With periodic BC's there are m+1 unknowns u(2:m+2)
