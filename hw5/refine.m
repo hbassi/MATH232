@@ -9,5 +9,5 @@ hold off
 xlabel('nodes')
 ylabel('error')
 title('loglog of error vs mesh width')
-legend('Poisson problem', 'slope -2')
+legend('FD method', 'slope -2')
 saveas(gcf,'refine.png')
