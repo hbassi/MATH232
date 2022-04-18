@@ -2,10 +2,10 @@ close all; clc; clear all
 ax = 0;
 bx = 1;
 tfinal = 1;
-m = 1000;
+m = 100;
 h = (bx-ax)/(m+1);
-k = 0.4*h;
-x = linspace(ax,bx,m+2)';
+CFL = 0.9;
+x = [0:h:1]';
 u = sin(2*pi*x);
 
-[u] = burgers(x,u,h,k, tfinal);
+[u_sol] = burgers(x,u,h,CFL, tfinal);
