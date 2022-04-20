@@ -9,7 +9,7 @@ if which == 'LW'
     du = -(burgers_LW(ub(2:N+1),ub(3:N+2),0.2) - burgers_LW(ub(1:N),ub(2:N+1),0.2))/h;
 end
 
-if which == 'UW'
-    du = -(burgers_up(ub(2:N+1),ub(3:N+2),maxvel) - burgers_up(ub(1:N),ub(2:N+1), maxvel))/h;
+if which == 'UP'
+    du = -(burgers_up(ub(2:N+1),ub(1:N), maxvel))/h;
 end
 return
