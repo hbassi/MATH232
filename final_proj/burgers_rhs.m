@@ -1,13 +1,15 @@
-function [du] = burgers_rhs(x,u,h,k,maxvel)
+function [du] = burgers_rhs(x,u,h, maxvel,which)
 %BC
-m = 1;
-%xl = min(x); xr = max(x); 
 N = length(u);
-%xb = zeros(N+2*m,1); 
-ub = zeros(N+2*m,1); q = [1:m];
+[xb,ub] = extend(x,u,h,1,'D',2,'N',0);
+if which == 'LF'
+    du = -(burgers_LF(ub(2:N+1),ub(3:N+2),maxvel) - burgers_LF(ub(1:N),ub(2:N+1), maxvel))/h;
+end
+if which == 'LW'
+    du = -(burgers_LW(ub(2:N+1),ub(3:N+2),0.2) - burgers_LW(ub(1:N),ub(2:N+1),0.2))/h;
+end
 
-%xb(m-q+1) = xl-q*h; xb(N+m+q) = xr + q*h; xb((m+1):N+m) = x(1:N);
-ub(m-q+1) = u(N-q); ub(N+m+q) = u(q+1); ub((m+1):(N+m)) = u(1:N);
-
-du = -(burgers_LF(ub(2:N+1),ub(3:N+2),maxvel) - burgers_LF(ub(1:N),ub(2:N+1), maxvel))/h;
+if which == 'UW'
+    du = -(burgers_UW(ub(2:N+1),ub(3:N+2),maxvel) - burgers_UW(ub(1:N),ub(2:N+1), maxvel))/h;
+end
 return
