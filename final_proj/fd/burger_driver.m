@@ -2,7 +2,7 @@ close all; clc; clear all
 ax = 0;
 bx = 1;
 tfinal = 0.2;
-m = 128;
+m = 8192;
 h = (bx-ax)/(m);
 CFL = 0.9;
 x = [0:h:1]';
